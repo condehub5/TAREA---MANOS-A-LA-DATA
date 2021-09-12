@@ -1,0 +1,130 @@
+---
+title: "Municipalidades"
+author: "BEST"
+date: "25/7/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Mi primer ejemplo
+
+Aqui algo de texto
+
+```{r configuracion_inicial}
+library(tidyverse)
+municipalidades<-read.csv("https://raw.githubusercontent.com/BESTDATASCIENCE/manos-a-la-data/master/data/2020/2020-03-04/municipalidades.csv")
+
+
+```
+
+## Gráfico general
+
+You can also embed plots, for example:
+
+```{r grafico_general, echo=FALSE,fig.height=50}
+municipalidades2 <- municipalidades %>%
+                      filter(PROVINCIA=="MUNICIPALIDAD METROPOLITANA DE LIMA")
+
+p5 <- ggplot(municipalidades2, aes(x = periodo, y = avance))
+(p5 <- p5 + geom_line() +
+      facet_wrap(~Municipalidad, ncol = 2)+
+
+      theme( axis.text = element_text( size = 14 ),
+             axis.text.x = element_text( size = 12 ),
+             axis.title = element_text( size = 14, face = "bold" ),
+             legend.position="none",
+             strip.text = element_text(size = 6))  +
+      labs(title = "Avance presupuestal", subtitle = "Histórico 2007-2019",caption = "Fuente: Consulta Amigable",
+           x="Periodo", y="Avance presupuestal (%)")+ stat_smooth(method=lm))
+```
+
+### Gráfico específico
+
+```{r}
+url <- "https://digital.miraflores.gob.pe:8443/miraflores/librerias/lib/publico/images/miraflores-en-tu-corazon.png"
+url2 <- "https://digital.miraflores.gob.pe:8443/miraflores/librerias/lib/publico/images/miraflores-en-tu-corazon.png"
+
+# Googlea y encuentras esto https://stackoverflow.com/questions/28912868/how-to-insert-image-from-url-in-markdown
+
+```
+
+
+<center><img src="`r url`"></center>
+
+```{r}
+municipalidad_lavictoria <- municipalidades %>%
+                      filter(Municipalidad=="MUNICIPALIDAD DISTRITAL DE LA VICTORIA")
+
+p5 <- ggplot(municipalidad_lavictoria, aes(x = periodo, y = avance))
+(p5 <- p5 + geom_line() +
+            theme( axis.text = element_text( size = 14 ),
+             axis.text.x = element_text( size = 12 ),
+             axis.title = element_text( size = 14, face = "bold" ),
+             legend.position="none",
+             strip.text = element_text(size = 6))  +
+      labs(title = "Avance presupuestal de La Victoria", subtitle = "Histórico 2007-2019",caption = "Fuente: Consulta Amigable",
+           x="Periodo", y="Avance presupuestal (%)")+ stat_smooth(method=lm))
+
+```
+
+```{r}
+municipalidad_pueblo_libre <- municipalidades %>%
+                      filter(Municipalidad=="MUNICIPALIDAD DISTRITAL DE PUEBLO LIBRE")
+
+p5 <- ggplot(municipalidad_pueblo_libre, aes(x = periodo, y = avance))
+(p5 <- p5 + geom_line() +
+            theme( axis.text = element_text( size = 14 ),
+             axis.text.x = element_text( size = 12 ),
+             axis.title = element_text( size = 14, face = "bold" ),
+             legend.position="none",
+             strip.text = element_text(size = 6))  +
+      labs(title = "Avance presupuestal de Pueblo Libre", subtitle = "Histórico 2007-2019",caption = "Fuente: Consulta Amigable",
+           x="Periodo", y="Avance presupuestal (%)")+ stat_smooth(method=lm))
+avance_median_pl <- median(municipalidad_pueblo_libre$avance)
+avance_mean_pl <- mean(municipalidad_pueblo_libre$avance)
+avance_sd_pl <- sd(municipalidad_pueblo_libre$avance)
+avance_var_pl <- var(municipalidad_pueblo_libre$avance)
+```
+
+```{r}
+municipalidad_san_martin_porres <- municipalidades %>%
+                      filter(Municipalidad=="MUNICIPALIDAD DISTRITAL DE SAN MARTIN DE PORRES")
+
+p5 <- ggplot(municipalidad_san_martin_porres, aes(x = periodo, y = avance))
+(p5 <- p5 + geom_line() +
+            theme( axis.text = element_text( size = 14 ),
+             axis.text.x = element_text( size = 12 ),
+             axis.title = element_text( size = 14, face = "bold" ),
+             legend.position="none",
+             strip.text = element_text(size = 6))  +
+      labs(title = "Avance presupuestal de San Martín de Porres", subtitle = "Histórico 2007-2019",caption = "Fuente: Consulta Amigable",
+           x="Periodo", y="Avance presupuestal (%)")+ stat_smooth(method=lm))
+avance_median_smp <- median(municipalidad_san_martin_porres$avance)
+avance_mean_smp <- mean(municipalidad_san_martin_porres$avance)
+avance_sd_smp <- sd(municipalidad_san_martin_porres$avance)
+avance_var_smp <- var(municipalidad_san_martin_porres$avance)
+```
+
+```{r}
+municipalidad_ate_vitarte <- municipalidades %>%
+                      filter(Municipalidad=="MUNICIPALIDAD DISTRITAL DE ATE - VITARTE")
+
+p5 <- ggplot(municipalidad_ate_vitarte, aes(x = periodo, y = avance))
+(p5 <- p5 + geom_line() +
+            theme( axis.text = element_text( size = 14 ),
+             axis.text.x = element_text( size = 12 ),
+             axis.title = element_text( size = 14, face = "bold" ),
+             legend.position="none",
+             strip.text = element_text(size = 6))  +
+      labs(title = "Avance presupuestal de Ate - Vitarte", subtitle = "Histórico 2007-2019",caption = "Fuente: Consulta Amigable",
+           x="Periodo", y="Avance presupuestal (%)")+ stat_smooth(method=lm))
+avance_median_av <- median(municipalidad_ate_vitarte$avance)
+avance_mean_av <- mean(municipalidad_ate_vitarte$avance)
+avance_sd_av <- sd(municipalidad_ate_vitarte$avance)
+avance_var_av <- var(municipalidad_ate_vitarte$avance)
+
+
+```
